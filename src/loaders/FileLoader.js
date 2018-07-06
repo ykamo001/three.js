@@ -23,9 +23,13 @@ Object.assign( FileLoader.prototype, {
 
 		url = this.manager.resolveURL( url );
 
+		console.log( "What FileLoader thinks the URL is: " + url );
+
 		var scope = this;
 
 		var cached = Cache.get( url );
+
+		console.log( "What the cached URL is: " + cached );
 
 		if ( cached !== undefined ) {
 
@@ -63,6 +67,7 @@ Object.assign( FileLoader.prototype, {
 		var dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
 		var dataUriRegexResult = url.match( dataUriRegex );
 
+		console.log( "The response is: " + dataUriRegexResult );
 		// Safari can not handle Data URIs through XMLHttpRequest so process manually
 		if ( dataUriRegexResult ) {
 
@@ -165,11 +170,12 @@ Object.assign( FileLoader.prototype, {
 			var request = new XMLHttpRequest();
 
 			request.open( 'GET', url, true );
-
+			console.log( "The request was: " + url );
 			request.addEventListener( 'load', function ( event ) {
 
 				var response = this.response;
-
+				console.log( "The response form the request was: " );
+				console.log( response );
 				Cache.add( url, response );
 
 				var callbacks = loading[ url ];
