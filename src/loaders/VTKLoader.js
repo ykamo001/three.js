@@ -1169,12 +1169,6 @@ Object.assign( VTKLoader.prototype, EventDispatcher.prototype, {
 		// get the 5 first lines of the files to check if there is the key word binary
 		var meta = LoaderUtils.decodeText( new Uint8Array( data, 0, 250 ) ).split( '\n' );
 
-		for ( var i = 0; i < meta.length; i ++ ) {
-
-		    console.log( meta[ i ] );
-
-		}
-
 		if ( meta[ 0 ].indexOf( 'xml' ) !== - 1 ) {
 
 			return parseXML( getStringFile( data ) );

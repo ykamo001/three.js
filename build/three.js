@@ -31495,13 +31495,9 @@
 
 			url = this.manager.resolveURL( url );
 
-			console.log( "What FileLoader thinks the URL is: " + url );
-
 			var scope = this;
 
 			var cached = Cache.get( url );
-
-			console.log( "What the cached URL is: " + cached );
 
 			if ( cached !== undefined ) {
 
@@ -31539,7 +31535,6 @@
 			var dataUriRegex = /^data:(.*?)(;base64)?,(.*)$/;
 			var dataUriRegexResult = url.match( dataUriRegex );
 
-			console.log( "The response is: " + dataUriRegexResult );
 			// Safari can not handle Data URIs through XMLHttpRequest so process manually
 			if ( dataUriRegexResult ) {
 
@@ -31642,12 +31637,9 @@
 				var request = new XMLHttpRequest();
 
 				request.open( 'GET', url, true );
-				console.log( "The request was: " + url );
 				request.addEventListener( 'load', function ( event ) {
 
 					var response = this.response;
-					console.log( "The response form the request was: " );
-					console.log( response );
 					Cache.add( url, response );
 
 					var callbacks = loading[ url ];
@@ -39658,12 +39650,6 @@
 
 			// get the 5 first lines of the files to check if there is the key word binary
 			var meta = LoaderUtils.decodeText( new Uint8Array( data, 0, 250 ) ).split( '\n' );
-
-			for ( var i = 0; i < meta.length; i ++ ) {
-
-			    console.log( meta[ i ] );
-
-			}
 
 			if ( meta[ 0 ].indexOf( 'xml' ) !== - 1 ) {
 
