@@ -39,12 +39,16 @@
 
 		<script src="../build/three.js"></script>
 
-		<script src="js/Detector.js"></script>
+		<script src="js/WebGL.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 
 		<script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			if ( WEBGL.isWebGLAvailable() === false ) {
+
+				document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+
+			}
 
 			var container, stats, clock, mixer;
 			var camera, scene, renderer, objects;
@@ -67,7 +71,7 @@
 				mixer = new THREE.AnimationMixer( scene );
 
 				var loader = new THREE.JSONLoader();
-				loader.load( 'models/animated/monster/monster.js', function ( geometry, materials ) {
+				loader.load( 'models/json/legacy/monster/monster.js', function ( geometry, materials ) {
 
 					// adjust color a bit
 

@@ -45,11 +45,15 @@
 
 		<script src="../build/three.js"></script>
 
-		<script src="js/Detector.js"></script>
+		<script src="js/WebGL.js"></script>
 
 		<script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			if ( WEBGL.isWebGLAvailable() === false ) {
+
+				document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+
+			}
 
 			var camera, scene, renderer, mesh, material;
 			var drawStartPos = new THREE.Vector2();
@@ -95,8 +99,7 @@
 
 				// set canvas as material.map (this could be done to any map, bump, displacement etc.)
 
-				material.map = new THREE.Texture( drawingCanvas );
-				material.map.needsUpdate = true;
+				material.map = new THREE.CanvasTexture( drawingCanvas );
 
 				// set the variable to keep track of when to draw
 

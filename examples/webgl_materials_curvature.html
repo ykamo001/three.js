@@ -28,7 +28,7 @@
 				color: #ffffff;
 			}
 
-			#oldie a { color:#da0 }
+			#webglmessage a { color:#da0 }
 		</style>
 	</head>
 	<body>
@@ -37,7 +37,7 @@
 		<div id="info"><a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - curvature estimation of a geometry by <a href="http://codercat.club" target="_blank" rel="noopener">CoderCat</a></div>
 
 		<script src="../build/three.js"></script>
-		<script src="js/Detector.js"></script>
+		<script src="js/WebGL.js"></script>
 
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/loaders/OBJLoader.js"></script>
@@ -73,11 +73,17 @@
 
 		<script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			if ( WEBGL.isWebGLAvailable() === false ) {
+
+				document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+
+			}
 
 			var container;
 
 			var camera, scene, renderer;
+
+			var controls;
 
 			var ninjaMeshRaw, curvatureAttribute, bufferGeo;
 
@@ -190,10 +196,6 @@
 								var posB_A = new THREE.Vector3().subVectors( posB, posA );
 								var posB_C = new THREE.Vector3().subVectors( posB, posC );
 								var posC_A = new THREE.Vector3().subVectors( posC, posA );
-
-								var normB_A = new THREE.Vector3().subVectors( normB, normA );
-								var normB_C = new THREE.Vector3().subVectors( normB, normC );
-								var normC_A = new THREE.Vector3().subVectors( normC, normA );
 
 								var b2a = normB.dot( posB_A.normalize() );
 								var b2c = normB.dot( posB_C.normalize() );
@@ -342,7 +344,7 @@
 				topologyFolder.add( params, 'filterConvex' );
 				topologyFolder.add( params, 'filterConcave' );
 				topologyFolder.add( params, 'filterBoth' );
-				topologyFolder.open()
+				topologyFolder.open();
 
 				onWindowResize();
 
