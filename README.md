@@ -34,7 +34,7 @@ Before you execute the steps below, please make sure you have the following inst
 git clone https://github.com/ykamo001/three.js.git
 cd ./three.js
 npm install
-npm run build-uglify
+npm run build
 npm link
 ```
 
@@ -46,3 +46,6 @@ npm link
 [dependencies-badge-url]: https://david-dm.org/mrdoob/three.js
 [devDependencies-badge]: https://img.shields.io/david/dev/mrdoob/three.js.svg
 [devDependencies-badge-url]: https://david-dm.org/mrdoob/three.js#info=devDependencies
+
+## Notes
+This local copy of ThreeJS has been modified to work well with React.
